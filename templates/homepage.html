@@ -1,0 +1,138 @@
+{% include "layout.html" %}
+
+{% block body %}
+       
+<div class="wrapper" style="height:2500px;">
+
+    <nav class="navbar navbar-inverse" style="height:100px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" target="_blank" href="http://www.physiology.ucla.edu/Labs/khakh/index.htm">Khakh Lab</a>-->
+                <a class="navbar-brand" target="_blank" href="http://www.physiology.ucla.edu/Labs/khakh/index.htm"><img class="img-responsive" width="65%" src="/static/adultastro/images/khakh_logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="#navbar-collapse"></div>
+        </div>
+    </nav>
+
+    <div class="content-header" >
+        <h1 id="home-title" class="col-md-12 ">
+            <span style="color:#2196F3; display:inline-block; vertical-align:bottom; font-family:'Lato' !important; ">Adult Astrocyte RNA-Seq Explorer</span>
+        </h1>
+    </div>
+
+    <div class="col-xs-8 col-xs-offset-2 container">
+        <form action="addgene" autocomplete="off" role= "search">
+                <select id="home-searchbox-input" name="query" placeholder="Search for a gene" autocomplete="off" data-width="100%" class="input-lg form-control select2 "></select>   
+        </form>
+    </div> 
+
+    <div class="col-xs-8 col-xs-offset-2" style="border-radius:10px; ">
+        <h5>
+            <span class="text-primary" style="text-align:center; display:block;  font-family:'Lato' !important; "><br>“Search for a gene” will provide differential expression data from the following datasets:
+            </span>
+        </h5>
+    </div>
+
+   <div class="col-xs-8 col-xs-offset-2" style=" text-align: center;">
+        <span class="btn btn-primary btn-md round btn-responsive" style="cursor: none;">Cortex</span>&nbsp
+        <span class="btn btn-primary btn-md round btn-responsive" style="cursor: none;">Striatum</span>&nbsp
+        <span class="btn btn-primary btn-md round btn-responsive" style="cursor: none;">Hippocampus</span>&nbsp
+    </div>
+
+    
+    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        <br><br>
+        <a href="downloadAstData" class="btn btn-default btn-lg btn-block btn-responsive">
+            <i class="fa fa-download fa-1x" style="font-family: FontAwesome !important; color:darkred;" aria-hidden="true"></i> Download complete differential expression data
+        </a>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 alert" style="border-radius: 10px 10px 10px 10px; margin-top:50px; border-color:#2F6FA8; background-color:#4F88B9; border: 1px solid transparent;">
+        <p><a style="color:white" href="https://www.ncbi.nlm.nih.gov/pubmed/28712653" target="_blank">Chai, H.*, Diaz-Castro, B.*, Shigetomi, E., Monte, E., Octeau, J.C., Yu, X., Cohn, W., Rajendran, P.S., Vondriska, T.M., Whitelegge, J.P., Coppola, G. & Khakh, B.S. (2017) Neural circuit-specialized astrocytes: genomic, proteomic, morphological and functional evidence. Neuron 95, 1-19.</a></p>
+        <hr style="margin-top: 10px;margin-bottom: 10px;"/>
+        <p><a style="color:white" href="https://www.ncbi.nlm.nih.gov/pubmed/27939582" target="_blank">Srinivasan, R.*, Lu, T.-Y.*, Chai, H.*, Xu, J., Huang, B.S., Golshani, P., Coppola, G., and Khakh, B.S. (2016). New transgenic mouse lines for selectively targeting astrocytes and studying calcium signals in astrocyte processes in situ and in vivo. Neuron 92, 1181–1195.</a></p>
+        <p class="text-warning">*Equally contributing authors.</p>
+    </div>
+
+    <!-- Modal for downloading data    
+    <a target="_blank" data-toggle="modal" data-target="#myModal" class="btn btn-lg btn-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" style="text-align:center;  margin-top:40px; font-family:'Lato' !important;">Download complete differential expression datasets</a>
+
+    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family:'Lato' !important;">
+        <div class="modal-dialog modal-lg" style="width:1050px" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" style="text-align:center;">Download complete differential expression data</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="row">
+                        &nbsp<a href="downloadAstData?filetype=file1" target="_blank" class="btn btn-primary btn-lg round">Uninjured WT Astrocytes<br>and<br>Uninjured WT Non-Astrocytes</a>&nbsp
+                        <a href="downloadAstData?filetype=file2" target="_blank" class="btn btn-primary btn-lg round">SCI WT Astrocytes<br>and<br>Uninjured WT Astrocytes</a>&nbsp
+                        <a href="downloadAstData?filetype=file3" target="_blank" class="btn btn-primary btn-lg round">SCI STAT3cKO Astrocytes<br>and<br>Uninjured WT Astrocytes</a>&nbsp
+                        <a href="downloadAstData?filetype=file4" target="_blank" class="btn btn-primary btn-lg round">SCI WT Non-Astrocytes<br>and<br>Uninjured WT Non-Astrocytes</a>&nbsp
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script type="text/javascript">
+        var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+        $('#home-searchbox-input').select2({
+            placeholder: 'Search for a gene',
+            minimumInputLength: 2,
+            multiple: false,            
+            selectOnBlur: true,
+            //data:data,
+            ajax: {
+                type: 'GET',
+                quietMillis: 150,
+                url: "autocomplete",
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        maxRows: 100,
+                        genesearchTerm: params.term, // search term
+                    };
+                },
+                processResults: function (data, page) {
+                    var d = {results:[]}
+                    for(var i=0; i<data.length;i++){
+                        q = {}
+                        q.id = data[i];
+                        q.text = data[i];
+                        d.results.push(q);
+                    }
+                    return d;
+
+                }
+            }
+        });
+        $('#home-searchbox-input').on("select2:select", function() {
+            $(this).parents('form').submit();
+        });
+
+        /*function downloadastdata(filetype){
+            $.get("downloadAstData", {filetype:filetype}, function(data) {
+            });
+        }
+        */
+    </script>
+
+</div>
+
+
+{% endblock %}

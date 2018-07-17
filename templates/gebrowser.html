@@ -1,0 +1,42 @@
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title >Gene Enrichment Genome Browswer</title>
+  	
+  	<script type="text/javascript" src="/static/adultastro/jquery-1.12.1.min.js"></script>
+  	<link type="text/css" href="/static/adultastro/gebrowser/style.css" rel="stylesheet" />
+	<script type="text/javascript" src="/static/adultastro/gebrowser/base.js"></script>
+	<script type="text/javascript" src="/static/adultastro/gebrowser/personality.js"></script>
+	<script type="text/javascript" src="/static/adultastro/gebrowser/embed.js"></script>
+	
+</head>
+<body>
+		
+	<div id="gebrowserDIV" style="padding-top:15px;padding-bottom:15px;opacity:1; box-shadow: 0px 0px 3px 3px rgba(50,50,50,0.15); -moz-box-shadow: 0px 0px 3px 3px rgba(50,50,50,0.15); -webkit-box-shadow: 0px 0px 3px 3px rgba(50,50,50,0.15); border-top:solid 1px white; width:auto;" ></div>
+	
+	<script type='text/javascript'>
+		//var theme = 'custom';
+		var mywidth = document.body.clientWidth;
+		
+		function astGeBrowser(bwfiledetails, genecords, genomex){
+	    	//'chr11:120537974-120570760'
+        	document.getElementById("gebrowserDIV").innerHTML = "";
+        	embed_washugb({
+            	host:'gebrowserMain',
+            	container:document.getElementById('gebrowserDIV'),
+            	genome:genomex,
+            	panelWidth: mywidth - 300,
+            	leftSpaceWidth:200,
+            	noDeleteButton:true,
+            	coordinate:genecords,
+            	showSingularFacetTable:true,
+            	showContent:bwfiledetails
+        	});
+    	}
+    </script>	
+
+
+
+</body>
+</html>

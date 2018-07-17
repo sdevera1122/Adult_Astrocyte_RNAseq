@@ -1,0 +1,90 @@
+{% include "layout.html" %}
+
+{% block body %}
+
+<nav class="navbar navbar-inverse" style="height:100px">
+    <div class="container-fluid">
+        <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" target="_blank" href="http://www.physiology.ucla.edu/Labs/khakh/index.htm"><img class="img-responsive" width="65%" src="/static/adultastro/images/khakh_logo.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse" style="margin-top: 25px; background-color:black; color:white;">
+            <ul class="nav navbar-nav navbar-right" style="margin-top:10px; font-size:18px;">
+                    <li><a href="/">Adult Astrocyte RNA-Seq Explorer</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+<div id="container" class="col-md-10 col-md-offset-1" style="margin-top:100px; width:80%; height:500px;"></div>
+
+<script type="text/javascript">
+    var geneNameList = JSON.parse('{{ geneNameList | escapejs }}');
+    var geneCountList = JSON.parse('{{ geneCountList | escapejs }}');
+
+    console.log(geneNameList,"",geneCountList)
+
+    //Generates highcharts with 10 genes 
+    onload(geneNameList, geneCountList);
+    
+    function onload(geneNameList, geneCountList){
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Top 10 searched genes'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: geneNameList,
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Count',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' hits'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+
+            
+            credits: {
+                enabled: true
+            },
+            series: [{
+                name: 'Genes',
+                data: geneCountList,
+            }]
+
+        });
+}
+
+
+</script>
+
+{% endblock %}

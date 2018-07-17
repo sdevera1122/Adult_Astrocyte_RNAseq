@@ -1,0 +1,211 @@
+.navbar-inverse {
+    height:100px;
+    background-color: black;
+    border-color: transparent;
+    color: white;
+}
+
+.navbar-brand {
+  padding: 0px; /* firefox bug fix */
+}
+
+/*.navbar-brand>img {
+  height: 100%;
+  padding: 15px; /* firefox bug fix
+  width: auto;
+}*/
+
+.row{
+    margin-right: 0px;
+}
+.btn{
+  text-transform:none;
+}
+textarea:focus, input:focus, .uneditable-input:focus {   
+  border-color: rgba(72, 201, 207, 0.8) !important;
+  box-shadow: 0 1px 1px rgba(72, 201, 207, 0.075) inset, 0 0 8px rgba(72, 201, 207, 0.6) !important;
+  outline: 0 none !important;
+}
+
+.input-lg {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    top: 85%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 22px;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #CCC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+#home-title {
+    text-align: center;
+    padding: 30px;
+}
+            
+*{
+    font-family:'Lato' !important;
+}
+
+/* responsive text queries */
+@media screen and (max-width: 992px) {
+  p,.btn,input,div,span,h4 {
+    font-size: 100%;
+  }
+  h1 {
+    font-size: 24px;  
+  }
+  h2 {
+    font-size: 22px;  
+  }
+  h3 {
+    font-size: 18px;  
+  }
+  .container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  p,.btn,input,div,span,h4 {
+    font-size: 100%;
+  }
+  h1 {
+    font-size: 20px;  
+  }
+  h2 {
+    font-size: 18px;  
+  }
+  h3 {
+    font-size: 16px;  
+  }
+
+  .container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+/*.navbar-brand { 
+    min-height: inherit;
+    min-width: inherit; 
+}*/
+            
+            /*@media (max-width: 1023px) {
+              .btn-responsive {
+                padding:4px 9px;
+                font-size:80%;
+                
+              }
+              .btn-responsive2 {
+                padding:0px;
+                font-size:60%;
+              }
+
+              h5 {
+                font-size: 6pt;
+              }
+
+              .highcharts-title {
+                font-size: 20px !important;
+              }
+              .logtextspanclass{
+                font-size: 15px !important;
+              }
+              
+              #sofroheaderid{
+                font-size: 15px !important;
+                left:50px !important;
+              }
+              #arrbheaderid{
+                font-size: 15px !important;
+              }
+              #neurobioimg{
+                position: absolute;
+                top: 45px;
+                width:200px !important;
+              }
+              #sofroimgid{
+                margin-top: 35px !important;
+              }
+            }*/
+            
+/*
+@media (min-width: 1024px) and (max-width: 1260px) {
+              .btn-responsive {
+                padding:4px 9px;
+                font-size:80%;
+               
+              }
+              .btn-responsive2 {
+                padding:0px;
+                font-size:65%;
+               
+              }
+
+              h5 {
+                font-size: 8pt;
+              }
+
+              .highcharts-title {
+                font-size: 20px !important;
+              }
+              .logtextspanclass{
+                font-size: 15px !important;
+              }
+              
+              #sofroheaderid{
+                font-size: 15px !important;
+                left:50px !important;
+              }
+              #arrbheaderid{
+                font-size: 15px !important;
+              }
+              #neurobioimg{
+                position: absolute;
+                top: 45px;
+                left: 50px;
+                width:200px !important;
+              }
+              #sofroimgid{
+                margin-top: 35px !important;
+              }
+            }
+        
+            #home-title {
+                text-align: center;
+                padding: 30px;
+            }
+            
+            *{
+                font-family:'Lato' !important;
+            }
+            
+            .genetrash {
+                position: absolute;
+                left: 10px;
+                z-index: 1;
+                color:red;
+               
+                margin-top: 0px;
+            }*/

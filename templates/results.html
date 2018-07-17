@@ -1,0 +1,273 @@
+{% include "layout.html" %}
+
+{% block body %}
+
+    <nav class="navbar navbar-inverse" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" style="background-color:white; color:white;">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" target="_blank" href="http://www.physiology.ucla.edu/Labs/khakh/index.htm">Khakh Lab</a>-->
+            <a class="navbar-brand" target="_blank" href="http://www.physiology.ucla.edu/Labs/khakh/index.htm"><img class="img-responsive" width="65%" src="/static/adultastro/images/khakh_logo.png"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse" style="margin-top: 25px; background-color:black; color:white;">
+                <form class="navbar-form navbar-right" action="addgene" role="search">
+                    <div class="form-group">
+                        <select name="query" id="results-searchbox-input" class=" form-control select2" placeholder="Search" type="text"></select>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right" style="margin-top:10px; font-size:18px;">
+                    <li><a href="/">Adult Astrocyte RNA-Seq Explorer</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+<div id="wrapper" style="height:2500px;">
+    
+    <div class="page-header row">
+        <div class="col-xs-6">
+            <h4 id="results_page_header">Expression profile for gene</h4>
+        </div>
+        <div class="col-xs-offset-4 pull-right">
+            <a class="btn btn-default btn-lg" href="javascript:getBwFileDetails();" aria-label="Refresh">
+                <i class="fa fa-binoculars" style="font-family: FontAwesome !important; color:red;" aria-hidden="true"></i> Bigwig Xplorer
+            </a>
+       </div>
+    </div>
+
+    <!--
+    <div class="row jumbotron" style="padding-top: 10px; padding-bottom: 30px;">
+        <h4 class="col-xs-offset-5" style="color: seagreen">Cortex</h4>
+        <div id="cortex_plot1" class="col-xs-4 col-xs-offset-1" style="height:400px">cot_section1</div>
+        <div id="cortex_plot2" class="col-xs-6 " style="height:400px">cot_section2</div>
+    </div>
+
+    <div class="row jumbotron" style="padding-top: 10px; padding-bottom: 30px;">
+        <h4 class="col-xs-offset-5" style="color: seagreen">Striatum & Hippocampus</h4>
+        <div id="str_hip_plot1" class="col-xs-4 col-xs-offset-1" style="height:400px">sta_section1</div>
+        <div id="str_hip_plot2" class="col-xs-6" style="height:400px">sta_section2</div>
+    </div>
+    -->
+
+    <div class="row jumbotron" style="padding-top: 10px; padding-bottom: 30px;">
+        <h4 class="col-xs-offset-5" style="color: #617D88"><strong>Cortex</strong></h4>
+        <div id="cortex_plot1" class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1" style="height:260px;">cot_section1</div><!--margin-top:60px;-->
+        <div id="cortex_plot2" class="col-xs-12 col-sm-6 col-md-6" style="height:260px">cot_section2</div>
+    </div>
+
+    <div class="row jumbotron" style="padding-top: 10px; padding-bottom: 30px;">
+        <h4 class="col-xs-offset-5" style="color: #617D88"><strong>Striatum & Hippocampus</strong></h4>
+        <div id="str_hip_plot1" class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1" style="height:400px;">sta_section1</div><!--margin-top:200px;-->
+        <div id="str_hip_plot2" class="col-xs-12 col-sm-6 col-md-6" style="height:400px">sta_section2</div>
+    </div>
+
+    <div class="jumbotron col-xs-12 col-xs-offset-0" style="padding-top: 10px; padding-bottom: 30px;">
+        <div id="protein_data" class="col-xs-10 col-xs-offset-1" >
+            <h4 class="col-xs-offset-5" style="color: #617D88"><strong>Protein data</strong></h4>
+            <table class="table table-bordered table-striped " style="background-color: white">
+                <thead>
+                    <tr>
+                        <th>Ratio Str/Hip (Protein)</th>
+                        <th>Ratio Str/Hip (RNA)</th>
+                        <th>Protein accession</th>
+                        <th>Protein name</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <tr>
+                        <td id="ratioProtein"></td>
+                        <td id="ratioRNA"></td>
+                        <td id="proteinAccession"></td>
+                        <td id="proteinName"></td>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="splicerheaderID" class="alert alert-dismissible alert-warning" style="background-color:#617D88; visibility: hidden; padding-top: 0px;padding-bottom: 0px;">
+        <h5 id="splicertextID" style="margin-top: 0px;margin-bottom: 0px; color: white; font-family:'Lato' ">Splicing browser</h5>
+        <p style="text-align:right;"><a style="color: white;" href="http://epigenomegateway.wustl.edu/info/" target="_blank">Supported by Washington Epigenome Browser</a></p>     
+    </div>
+    <div id="ast_gebrowserframe_divid" style=" width:100%">
+        <iframe id="ast_gebrowserframe" name="ast_gebrowserframeName" frameborder="0" width="100%" height="1600"></iframe>
+    </div>
+
+    
+    
+</div>
+
+
+
+<script type="text/javascript">
+
+         $("[data-toggle=popover]").popover({html:true});
+
+            var fpkmdata = JSON.parse('{{ finalfpkmdata | escapejs }}');
+            var GENENAME = '';
+            for (i in fpkmdata){
+                if (i == 'cortex_dist_bins'){
+                    var cortex_dist_bins = fpkmdata[i]
+                }
+                else if (i == 'striatum_dist_bins'){
+                    var striatum_dist_bins = fpkmdata[i]
+                }
+                else if (i == 'hippocampus_dist_bins'){
+                    var hippocampus_dist_bins = fpkmdata[i]
+                }
+                else if (i == 'proteindata'){
+                    var proteindata = fpkmdata[i]
+                }
+                else{
+                    var genename = i;
+                    var genedata = fpkmdata[i];
+                }
+            }
+
+            GENENAME = genename;
+
+            for (j in genedata){
+                //Cortex
+                if (j == 'cortex_input_val'){
+                    var cortex_input_val = parseFloat( genedata['cortex_input_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'cortex_input_val_sem'){
+                    var cortex_input_val_sem = parseFloat( genedata['cortex_input_val_sem'] );
+                }
+                else if (j == 'cortex_ip_val'){
+                    var cortex_ip_val = parseFloat( genedata['cortex_ip_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'cortex_ip_val_sem'){
+                    var cortex_ip_val_sem = parseFloat( genedata['cortex_ip_val_sem'] );
+                }
+
+                //Striatum
+                else if (j == 'striatum_input_val'){
+                    var striatum_input_val = parseFloat( genedata['striatum_input_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'striatum_input_val_sem'){
+                    var striatum_input_val_sem = parseFloat( genedata['striatum_input_val_sem'] );
+                }
+                else if (j == 'striatum_ip_val'){
+                    var striatum_ip_val = parseFloat( genedata['striatum_ip_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'striatum_ip_val_sem'){
+                    var striatum_ip_val_sem = parseFloat( genedata['striatum_ip_val_sem'] );
+                }
+                //Hippocampus
+                else if (j == 'hippocampus_input_val'){
+                    var hippocampus_input_val = parseFloat( genedata['hippocampus_input_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'hippocampus_input_val_sem'){
+                    var hippocampus_input_val_sem = parseFloat( genedata['hippocampus_input_val_sem'] );
+                }
+                else if (j == 'hippocampus_ip_val'){
+                    var hippocampus_ip_val = parseFloat( genedata['hippocampus_ip_val'] );
+                }
+                //Using standard error mean and calculating error plot high and low limits
+                else if (j == 'hippocampus_ip_val_sem'){
+                    var hippocampus_ip_val_sem = parseFloat( genedata['hippocampus_ip_val_sem'] );
+                }
+            }
+
+            var cortex_ip_val_errorplot = [ parseFloat( (cortex_ip_val - cortex_ip_val_sem).toFixed(5) ), parseFloat( (cortex_ip_val + cortex_ip_val_sem).toFixed(5) ) ];
+            var cortex_input_val_errorplot = [ parseFloat( (cortex_input_val - cortex_input_val_sem).toFixed(5) ), parseFloat( (cortex_input_val + cortex_input_val_sem).toFixed(5) ) ];
+
+            var striatum_ip_val_errorplot = [ parseFloat( (striatum_ip_val - striatum_ip_val_sem).toFixed(5) ), parseFloat( (striatum_ip_val + striatum_ip_val_sem).toFixed(5) ) ];
+            var striatum_input_val_errorplot = [ parseFloat( (striatum_input_val - striatum_input_val_sem).toFixed(5) ), parseFloat( (striatum_input_val + striatum_input_val_sem).toFixed(5) ) ];
+            var hippocampus_ip_val_errorplot = [ parseFloat( (hippocampus_ip_val - hippocampus_ip_val_sem).toFixed(5) ), parseFloat( (hippocampus_ip_val + hippocampus_ip_val_sem).toFixed(5) ) ];
+            var hippocampus_input_val_errorplot = [ parseFloat( (hippocampus_input_val - hippocampus_input_val_sem).toFixed(5) ), parseFloat( (hippocampus_input_val + hippocampus_input_val_sem).toFixed(5) ) ];
+            
+            var errorPlotValues_cortex = [];
+            errorPlotValues_cortex.push(cortex_ip_val_errorplot);
+            errorPlotValues_cortex.push(cortex_input_val_errorplot);
+
+            var errorPlotValues_striatum_hippocampus = [];
+            errorPlotValues_striatum_hippocampus.push(striatum_ip_val_errorplot);
+            errorPlotValues_striatum_hippocampus.push(hippocampus_ip_val_errorplot);
+
+            errorPlotValues_striatum_hippocampus.push(striatum_input_val_errorplot);
+            errorPlotValues_striatum_hippocampus.push(hippocampus_input_val_errorplot);
+
+            document.getElementById('results_page_header').innerHTML = 'Expression profile of gene <strong>'+genename+'</strong>';
+            //Cortex plot2
+            drawfpkmchart('plot1','cortex_plot2', genename, ['Astrocyte', 'Whole tissue'], [parseFloat(cortex_ip_val), parseFloat(cortex_input_val) ], errorPlotValues_cortex );
+            var seriesData = {};
+            seriesData['name'] = 'Cortex IP FPKM';
+            seriesData['data'] = cortex_dist_bins;
+            //Cortex distribution plot1
+            drawDistributionChart('cortex_plot1', [seriesData] );
+
+            //Striatum and Hippocampus plot2
+            drawfpkmchart('plot2', 'str_hip_plot2', genename, ['Str Astrocyte', 'Hip Astrocyte', 'Str Whole tissue', 'Hip Whole tissue'], [parseFloat(striatum_ip_val), parseFloat(hippocampus_ip_val),
+                                                                                                                      parseFloat(striatum_input_val), parseFloat(hippocampus_input_val)], errorPlotValues_striatum_hippocampus );
+            
+             //Striatum and Hippocampus distribution plot1
+            //var seriesDataArray = [];
+            var seriesData_str = {};
+            seriesData_str['name'] = 'Striatum IP FPKM';
+            seriesData_str['data'] = striatum_dist_bins;
+
+            var seriesData_hip = {};
+            seriesData_hip['name'] = 'Hippocampus IP FPKM';
+            seriesData_hip['data'] = hippocampus_dist_bins;
+            drawDistributionChart('str_hip_plot1',[seriesData_str, seriesData_hip]);
+
+            createProteinTable(proteindata);
+
+            
+
+            
+</script>
+<script type="text/javascript">
+
+    $('#results-searchbox-input').select2({
+        placeholder: 'Search for a gene',
+        minimumInputLength: 2,
+        multiple: false,  
+        width:'100%',          
+        selectOnBlur: true,        
+        ajax: {
+            type: 'GET',
+            quietMillis: 150,
+            url: "autocomplete",
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    maxRows: 100,
+                    genesearchTerm: params.term, // search term
+                };
+            },
+            processResults: function (data, page) {
+                var d = {results:[]}
+                for(var i=0; i<data.length;i++){
+                    q = {}
+                    q.id = data[i];
+                    q.text = data[i];
+                    d.results.push(q);
+                }
+                return d;
+            }
+        }
+    });
+    $('#results-searchbox-input').on("select2:select", function() {
+        $(this).parents('form').submit();
+    });
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en_US">
+<head>
+<meta http-equiv='X-UA-Compatible' content='IE=EDGE' />
+<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+        <script type="text/javascript" src="/static/adultastro/jquery-1.12.1.min.js"></script>
+        <!--<script type="text/javascript" src="https://fgnass.github.io/spin.js/spin.min.js"></script>-->
+        <script type="text/javascript" src="/static/adultastro/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+        <!--<script type="text/javascript" src="/static/adultastro/bootstrap3-typeahead.js"></script>
+        <script type="text/javascript" src="/static/adultastro/angular.min.js"></script>-->
+        
+        <link rel=stylesheet type=text/css href="/static/adultastro/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+        <!--<link rel=stylesheet type=text/css href="/static/adultastro/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">-->
+        <link rel=stylesheet type=text/css href="/static/adultastro/paper_bootstrap.min.css">
+        
+        <script src="/static/adultastro/highcharts/highcharts.js"></script>
+        <script src="/static/adultastro/highcharts/highcharts-more.js"></script>
+        <script src="/static/adultastro/highcharts/exporting.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+       
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="/static/adultastro/select2-bootstrap.css">-->
+        <!--<link rel="icon" type="image/x-icon" href="/static/adultastro/favicon.ico" />-->
+
+        <link rel="stylesheet" href="/static/adultastro/adultastroSup.css">
+        <script src="/static/adultastro/adultastroSup.js"></script>
+
+        <title>Adult Astrocyte RNAseq</title>
+
+        <style type="text/css">
+            .bgimg {
+                background-image: url('/static/adultastro/images/clab_banner.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: right center;
+                /*background-position: left 150px top 0px;*/
+            }
+        </style>
+
+     
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-100356118-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+
+</head>
+ 
+<footer>
+        <div id="footer" class="container footer navbar-fixed-bottom" style="background-color:white; margin-top:40px; padding-bottom: 70px; width:100%; height: 75px; font-family:'Lato' !important; font-size: 10px;">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-4"><!--col-lg-4 col-lg-offset-1-->
+                    <ul class="list-unstyled">
+                        <li style="font-size: 12px; ">Developed & maintained by </br><span style="color:#245580; font-size: 15px;" >Sandeep Deverasetty </span><a href="mailto:sdeverasetty@mednet.ucla.edu" target="_blank"><i style="font-family: FontAwesome !important;" class="fa fa-envelope-o fa-fw"></i></a></li>
+                        <li style="font-size: 15px;"><a href="https://www.semel.ucla.edu/coppolalab" target="_blank">Coppola lab </a><a href="mailto:coppolalab.info@gmail.com" target="_blank"><i style="font-family: FontAwesome !important;" class="fa fa-envelope-o fa-fw"></i></a></li>
+                    </ul>
+                </div>
+                <!--<div class="col-lg-2" style="padding-left: 0px;padding-right: 0px; margin-left: -50px;">
+                    <a href="https://www.semel.ucla.edu/coppolalab" target="_blank"><img align="left" width="100%" height="100%"src="/static/adultastro/images/clab_banner.jpg" class="img-responsive" /></a>
+                </div>-->
+                
+                <div class="col-lg-3 col-md-3 col-lg-offset-3 col-md-offset-2 col-sm-4 text-center">
+                    <p>
+                        <span style="font-size: 12px;">For assistance with data sets, please contact</span>
+                        <br><span style="color:#245580; font-size: 15px;" >Hua Chai </span><a href="mailto:hchai@mednet.ucla.edu" target="_blank"><i style="font-family: FontAwesome !important;" class="fa fa-envelope-o fa-fw"></i></a>
+                        <br><span style="color:#245580; font-size: 15px;">Blanca Díaz Castro </span><a href="mailto:bdiazcastro@mednet.ucla.edu" target="_blank"><i style="font-family: FontAwesome !important;" class="fa fa-envelope-o fa-fw"></i></a>
+                    </p>
+                </div>
+                <div class="col-lg-1  pull-right"><!--col-lg-5 col-lg-offset-1-->
+                    <a href="https://www.uclahealth.org/Pages/Home.aspx" target="_blank"><img align="right" src="/static/adultastro/images/ucla-std-blu-rgb-108.png" class="img-responsive" /></a>
+                    <!--<ul class="list-unstyled">
+                        <li><a href="https://www.semel.ucla.edu/coppolalab" target="_blank"><img align="right" src="/static/adultastro/images/clab_banner.jpg" class="img-responsive" /></a></li>
+                        <li><a href="https://www.uclahealth.org/Pages/Home.aspx" target="_blank"><img align="right" src="/static/adultastro/images/ucla-std-blu-rgb-108.png" class="img-responsive" /></a></li>
+                    </ul>-->
+                </div>
+
+            </div>
+        </div>
+</footer>
+
+
